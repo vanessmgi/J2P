@@ -1,0 +1,48 @@
+/* GENERAL */
+body {
+   background-color: rgb(209, 209, 209);
+}
+h1 {
+   text-align: center;
+   color: blue;
+}
+
+h2 {
+   text-align: center;
+   text-decoration: underline;
+   padding: 20px 20px;
+}
+
+/* ARRAY */
+table {
+   border-collapse: collapse;
+   margin: auto;
+   box-shadow: 1px 2px 2px lightgray;
+}
+
+td.cell {
+   text-align: center;
+   border: 1px solid black;
+   width: 50px;
+   height: 50px;
+}
+
+/* CUSTOM CELLS */
+td.cellJ1 {
+   color: red;
+   background-color: rgb(255, 172, 172);
+}
+
+td.cellJ2 {
+   color: green;
+   background-color: rgb(145, 199, 145);
+}
+
+td.cellGr {
+   background-color: grey;
+}
+
+td.cellWP {
+   color: blue;
+}
+
