@@ -29,7 +29,7 @@ td.cell {
 
 /* CUSTOM CELLS */
 td.cellJ1 {
-   color: red;
+   color: #ff0000;
    background-color: rgb(255, 172, 172);
 }
 
