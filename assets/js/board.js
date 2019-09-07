@@ -3,6 +3,7 @@ class Board {
       this._col = col;
       this._row = row;
       this._greyBox = greyBox;
+      this._numberOfWeapons = 4;
    }
 
    generateBoard() {
@@ -29,8 +30,22 @@ class Board {
       // for (let i = 0; i < this._greyBox; i++) {
       //    console.log(i);
       // }
-      const cells = $(".cell");
-      console.log(cells);
+      
+      for (let i = 0; i < this._greyBox; i++) {
+         // Récupérer le total de noeuds ayant la class .cell
+         var len = $(".cell").length;
+         // Générer un indice aléatoire
+         var random = Math.floor( Math.random() * len ) + 1;
+
+         // Sélectionne un noeud html de façon aléatoire
+         $(".cell").eq(random).addClass('cellGr');
+      }
+   }
+
+   generateWeapons() {
+      console.log(this._numberOfWeapons)
+      $('.cell').eq(1).addClass('cellWP');
+      $('.cell').eq(1).text('WP1')
    }
 
    generateGreyCellsPosition() {
@@ -49,9 +64,10 @@ class Board {
    }
 }
 
-const board = new Board(4, 4, 2);
+const board = new Board(10, 10, 4);
 board.generateBoard();
-board.generateGreyCells();
+// board.generateGreyCells();
+board.generateWeapons()
 
 
 // function generateGreyCells(nbGreyCells) {
