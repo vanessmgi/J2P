@@ -1,8 +1,10 @@
 class Board {
-   constructor(col, row, greyBox) {
+   constructor(col, row, greyBox, numberOfWeapons, nbPlayerPosition) {
       this._col = col;
       this._row = row;
       this._greyBox = greyBox;
+      this._numberOfWeapons = numberOfWeapons;
+      this._nbPlayerPosition = nbPlayerPosition;
    }
 
    generateBoard() {
@@ -22,52 +24,50 @@ class Board {
    }
 
    generateGreyCells() {
-      // Générer "this._greyBox" positions aléatoires (cellules grises)
-      // Afficher les cases grises
+      console.log(this._greyBox)
 
-      // Et dans code HTML, mettre en gris, les cellules correspondantes
-      // for (let i = 0; i < this._greyBox; i++) {
-      //    console.log(i);
-      // }
-      const cells = $(".cell");
-      console.log(cells);
+      for (let i = 0; i < this._greyBox; i++) {
+         // Récupérer le total de noeuds ayant la class .cell
+         let $len = $(".cell").length;
+         // Générer un indice aléatoire
+         let $randomGC = Math.floor(Math.random() * $len) + 1;
+         // Sélectionne un noeud html de façon aléatoire
+         $('.cell').eq($randomGC).addClass('cellGr');
+      }
    }
 
-   generateGreyCellsPosition() {
-      // Boucle de 0 à greyBox
-         // generer aleatoirement un x entre this._col
-         // generer aleatoirement un y entre this._row
-         // stocker la position (x, y) dans une variable this.greysCells
+   generateWeapons() {
+      console.log(this._numberOfWeapons)
+
+      for (let i = 0; i < this._numberOfWeapons; i++) {
+            let $len = $(".cell").length;
+            let $randomWP = Math.floor(Math.random() * $len) + 1;
+            $('.cell').eq($randomWP).addClass('cellWP');
+            $('.cellWP').text('WP');
+      }
    }
 
-   HTMLGreyCells() {
-      // Boucle de 0 à nombre de cellules grises
-         // trouver dans le code HTML, le td correspondant
-            // dans le code HTML, trouver un td qui a la même position que la cellule grise courante
-         // griser le td correspondant
-            // ajouter une classe "cellule-grise"
+   generatePlayerPosition() {
+      console.log(this._nbPlayerPosition);
+
+      for (let i = 0; i < this._nbPlayerPosition; i++) {
+         let $len = $(".cell").length;
+         let $randomPosition = Math.floor(Math.random() * $len) + 1;
+         $('.cell').eq($randomPosition).addClass('cellPP');
+         $('.cellPP').text('Joueur');
+      }
    }
+
 }
 
-const board = new Board(4, 4, 2);
+const board = new Board(8, 8, 4, 4, 2);
 board.generateBoard();
 board.generateGreyCells();
+board.generateWeapons();
+board.generatePlayerPosition();
 
 
-// function generateGreyCells(nbGreyCells) {
-//    // boucle avec Math random
-//    let xRandom = Math.random(0, 0);
-//    let yRandom = Math.random(0, 0);
-// }
 
-// function generateWeapons(nbWeapons) {
-
-// }
-
-
-// function generatePlayers(nbPlayers) {
-
-// }
 
 
 

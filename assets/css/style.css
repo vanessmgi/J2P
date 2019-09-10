@@ -39,10 +39,15 @@ td.cellJ2 {
 }
 
 td.cellGr {
-   background-color: grey;
+   background-color: rgb(163, 161, 161);
 }
 
 td.cellWP {
-   color: blue;
+   background-color: rgb(109, 109, 253);
+   color: black;
 }
 
+td.cellPP {
+   background-color: rgb(69, 163, 89);
+   color: black;
+}
