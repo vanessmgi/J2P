@@ -1,53 +1,42 @@
 /* GENERAL */
 body {
-   background-color: rgb(209, 209, 209);
+   background-color: #244155 !important;
+   color: darkorange;
 }
 h1 {
    text-align: center;
-   color: blue;
+   color: darkorange !important;
+   margin-bottom: 60px !important;
 }
 
-h2 {
-   text-align: center;
-   text-decoration: underline;
-   padding: 20px 20px;
-}
 
 /* ARRAY */
 table {
    border-collapse: collapse;
    margin: auto;
-   box-shadow: 1px 2px 2px lightgray;
+   box-shadow: 1px 2px 5px #ffd413 !important;
 }
 
 td.cell {
    text-align: center;
-   border: 1px solid black;
+   border: 1px solid #835a0f;
    width: 50px;
    height: 50px;
 }
 
-/* CUSTOM CELLS */
-td.cellJ1 {
-   color: #ff0000;
-   background-color: rgb(255, 172, 172);
-}
 
-td.cellJ2 {
-   color: green;
-   background-color: rgb(145, 199, 145);
-}
+/* CUSTOM CELLS */
 
 td.cellGr {
-   background-color: rgb(163, 161, 161);
+   background-color: #9e9a9a;
 }
 
 td.cellWP {
-   background-color: rgb(109, 109, 253);
+   background-color: #a6a6dd;
    color: black;
 }
 
 td.cellPP {
-   background-color: rgb(69, 163, 89);
+   background-color: #86cc96;
    color: black;
 }
