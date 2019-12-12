@@ -20,23 +20,23 @@ table {
 td.cell {
    text-align: center;
    border: 1px solid #835a0f;
-   width: 50px;
-   height: 50px;
+   width: 80px;
+   height: 80px;
 }
 
 
 /* CUSTOM CELLS */
 
-td.cellGr {
-   background-color: #9e9a9a;
+td.greycell {
+   background-color: #ebe2e26c;
 }
 
-td.cellWP {
+td.weapon {
    background-color: #a6a6dd;
    color: black;
 }
 
-td.cellPP {
+td.player {
    background-color: #86cc96;
    color: black;
 }
