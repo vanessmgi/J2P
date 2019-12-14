@@ -2,6 +2,7 @@
 body {
    background-color: #244155 !important;
    color: darkorange;
+   font-size: 10px;
 }
 h1 {
    text-align: center;
@@ -20,8 +21,8 @@ table {
 td.cell {
    text-align: center;
    border: 1px solid #835a0f;
-   width: 80px;
-   height: 80px;
+   width: 60px;
+   height: 60px;
 }
 
 
