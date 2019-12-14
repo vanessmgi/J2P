@@ -11,6 +11,7 @@ class Game {
         this.board.generateWeapons();
         this.board.generatePlayerPosition();
         this.initPlayers();
+        this.resetGame();
     };
 
     initPlayers() {
@@ -28,10 +29,11 @@ class Game {
     };
 
     resetGame() {
-        $('#reset').on('click', function(){
-            
+        $('#reset').on('click', function() {
+            window.location.reload()
         });
     };
+
     // attackPhase() {
     //     this.getPlayer(0).attack(this.getPlayer(1));
     // }
