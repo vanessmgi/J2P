@@ -27,6 +27,11 @@ class Game {
         return $(`.cell[data-player-id=${indexPlayer}]`);
     };
 
+    resetGame() {
+        $('#reset').on('click', function(){
+            
+        });
+    };
     // attackPhase() {
     //     this.getPlayer(0).attack(this.getPlayer(1));
     // }
