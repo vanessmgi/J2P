@@ -9,7 +9,7 @@ class Board {
 
    // Génère un plateau de jeu + DOM
     generateBoard() {
-        let $boardContainer = $('#dynamicGame .board');
+        let $boardContainer = $('.board');
         let $table = $('<table></table>');
 
         for (let y = 0; y < this._row; y++) { // y => nombre de lignes
