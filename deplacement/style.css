@@ -1,0 +1,60 @@
+/* GENERAL */
+body {
+    background: url(/assets/img/background.jpg) no-repeat center;
+    background-size: cover;
+    color: rgb(255, 175, 2) !important;
+    font-family: 'Sorts Mill Goudy', serif !important;
+    font-size: 10px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    color: darkorange !important;
+    margin-bottom: 60px !important;
+}
+
+li {
+    list-style: none;
+    text-align: left;
+}
+
+
+/* ARRAY */
+table {
+    border-collapse: collapse;
+    background-color: rgba(102, 42, 15, 0.274);
+    margin: auto;
+    box-shadow: 0 1px 25px #fd98007a !important;
+
+}
+
+td.cell {
+    text-align: center;
+    border: 1px solid #ff9100;
+    font-size: 90%;
+    width: 70px;
+    height: 70px;
+}
+
+
+/* CUSTOM CELLS */
+
+td.greycell {
+    background-color: #000000e3;
+}
+
+td.weapon {
+    background-color: #ff9900ce;
+    color: rgb(0, 0, 0);
+}
+
+td.player {
+    background-color: rgba(248, 242, 242, 0.644);
+    color: rgb(0, 0, 0);
+}
+
+
+
