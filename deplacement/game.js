@@ -34,9 +34,9 @@ class Game {
 
     movePlayer() {
         let player = $(`.cell[data-player-id=${1}]`);
-        let cell = $('.cell');
+       
         $(player).click(function () {
-            //On change le fond en bleu
+            //joueur sélectionné via un bcg bleu
             $(this).css("background-color", "lightBlue");
         });
 
