@@ -46,14 +46,34 @@ $dbUpSelectedCell = $('.cell[data-x="2"][data-y="0"]')
 $downSelectedCell = $('.cell[data-x="2"][data-y="3"]')
 $dbDownSelectedCell = $('.cell[data-x="2"][data-y="4"]')
 
+/*
+$firstSelectedCell.click(function () {
+    const $player = $('.player')
+    $player.removeClass('player')
+    $firstSelectedCell.addClass('player')
 
+    console.log('first ok')
+})
+*/
 
 function movePlayer() {
     const $player = $('.player')
+    const $cells = $('.cell')
     $player.removeClass('player')
-    $selectedCell = $(this); 
+        if ($cells.hasClass('.player')) {
+            $cells.attr('data-empty', false)
+        } else {
+            $cells.attr('data-empty', true)
+        }
+    $selectedCell = $(this);
+    $selectedCell.attr('data-empty', false)
     $selectedCell.addClass('player');
+    
 }
+
+
+
+
 
 $firstSelectedCell.click(movePlayer);
 $rightSelectedCell.click(movePlayer);
