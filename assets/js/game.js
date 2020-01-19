@@ -12,6 +12,7 @@ class Game {
         this.board.generatePlayerPosition();
         this.initPlayers();
         this.resetGame();
+        this.movePlayer1();
     };
 
     initPlayers() {
@@ -33,6 +34,23 @@ class Game {
             location.reload('.board')
         });
      };
+
+    
+    // déplacement 1 joueur
+
+    movePlayer1() {
+        let $player1 = this.getPlayerCell(1)
+        let $cells = $('.cell')
+
+        $player1.click(function() {
+            $(this).css("background-color", "#fff")
+            let greyCell = ('.greycell')
+
+
+        });
+    }
+
+
 };
 
     // attackPhase() {
@@ -50,7 +68,7 @@ $(function () {
     let nbRows = 8;
     let nbGreyCell = 12;
     let nbWeapon = 4;
-    let nbPlayer = 2;
+    let nbPlayer = 1;
     let game = new Game(nbColumns, nbRows, nbGreyCell, nbWeapon, nbPlayer);
 
     game.start();
