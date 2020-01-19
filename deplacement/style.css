@@ -1,7 +1,6 @@
 /* GENERAL */
 body {
-    background: url(/assets/img/background.jpg) no-repeat center;
-    background-size: cover;
+    background-color: rgb(92, 131, 175);
     color: rgb(255, 175, 2) !important;
     font-family: 'Sorts Mill Goudy', serif !important;
     font-size: 10px;
@@ -27,13 +26,13 @@ table {
     border-collapse: collapse;
     background-color: rgba(102, 42, 15, 0.274);
     margin: auto;
-    box-shadow: 0 1px 25px #fd98007a !important;
+
 
 }
 
 td.cell {
     text-align: center;
-    border: 1px solid #ff9100;
+    border: 1px solid #ff91009a;
     font-size: 90%;
     width: 70px;
     height: 70px;
@@ -52,7 +51,7 @@ td.weapon {
 }
 
 td.player {
-    background-color: rgba(248, 242, 242, 0.644);
+    background-color: rgba(190, 190, 190, 0.589);
     color: rgb(0, 0, 0);
 }
 
