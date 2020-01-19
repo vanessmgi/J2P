@@ -7,6 +7,8 @@ class Board {
         this._nbPlayer = nbPlayer;
     };
 
+    
+
     // Génère un plateau de jeu + DOM
     generateBoard() {
         let $boardContainer = $('.board');
@@ -81,6 +83,7 @@ class Board {
         return !this.getCell(x, y).hasClass('player');
     };
 
+    
     // Vérifie si Joueur(s) autour d'une case
     noPlayersAround($position) {
         let $x = $position.x;
@@ -89,13 +92,37 @@ class Board {
         let $celluleDroiteIsNotPlayer = this.checkCellIsNotPlayer($x + 1, $y);
         let $celluleHautIsNotPlayer = this.checkCellIsNotPlayer($x, $y - 1);
         let $celluleBasIsNotPlayer = this.checkCellIsNotPlayer($x, $y + 1);
-
+        
         if ($celluleGaucheIsNotPlayer && $celluleDroiteIsNotPlayer && $celluleHautIsNotPlayer && $celluleBasIsNotPlayer) {
             // Aucun joueur autour
             return true;
         };
         return false;
     };
+
+    
+    // Vérifie qu'aucune case grise ne soit à coté de la cellule (x, y)
+    checkCellIsNotGreyCell(x, y) {
+        return !this.getCell(x, y).hasClass('greycell');
+    }
+
+    // Vérifie si .greycell autour d'une case
+    noGreyCellAround($position) {
+        let $x = $position.x;
+        let $y = $position.y;
+        let $celluleGaucheIsNotGreyCell = this.checkCellIsNotGreyCell($x - 1, $y);
+        let $celluleDroiteIsNotGreyCell = this.checkCellIsNotGreyCell($x + 1, $y);
+        let $celluleHautIsNotGreyCell = this.checkCellIsNotGreyCell($x, $y - 1);
+        let $celluleBasIsNotGreyCell = this.checkCellIsNotGreyCell($x, $y + 1);
+
+        if ($celluleGaucheIsNotGreyCell && $celluleDroiteIsNotGreyCell && $celluleHautIsNotGreyCell && $celluleBasIsNotGreyCell) {
+            // Aucun joueur autour
+            return true;
+        };
+        return false;
+    };
+
+
 
     // Génère la position de x player tant que la case est vide && sans spawn côte à côte
     generatePlayerPosition() {
