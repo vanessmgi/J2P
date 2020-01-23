@@ -57,8 +57,13 @@ $firstSelectedCell.click(function () {
 */
 
 function movePlayer() {
+    // Je sélectionne l'emplacement de mon joueur
     const $player = $('.player')
+
+    // Je sélectionne mes céllules
     const $cells = $('.cell')
+
+    // Je bouge mon joueur
     $player.removeClass('player')
         if ($cells.hasClass('.player')) {
             $cells.attr('data-empty', false)
@@ -68,7 +73,13 @@ function movePlayer() {
     $selectedCell = $(this);
     $selectedCell.attr('data-empty', false)
     $selectedCell.addClass('player');
-    
+
+    // Je calcule les nouveaux déplacements possibles à partir de la nouvelle position de mon joueur
+    calculatePossibleMovements()
+}
+
+// Future fonction qui permettra de définir les déplacements potentiels
+function calculatePossibleMovements() {
 }
 
 
@@ -84,5 +95,11 @@ $upSelectedCell.click(movePlayer);
 $dbUpSelectedCell.click(movePlayer);
 $downSelectedCell.click(movePlayer);
 $dbDownSelectedCell.click(movePlayer);
+
+/**
+ * Objectifs semaine du 26 janvier
+ *  -> Maintenant que tu l'as fait en dur, réaliser les event listeners avec un système de boucle au lieu de le faire en dur
+ *  -> Après le faire en fonction du déplacement du joueur (ça va être dans une fonction que tu vas appeler à chaque déplacement)
+ */
 
 
