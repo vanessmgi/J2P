@@ -47,26 +47,44 @@ function potentialsMoves() {
     const $maxMovesY = 1;
 
     // 3. Boucler jusqu'à que ce le nombre de mouvements maximum soit atteint
-
+    
     for (let i = 1; i <= $maxMovesX; i++) {
         let $cellLeft = getCell($positionPlayerX - i, $positionPlayerY).addClass('selectable-cell');
         let $cellRight = getCell($positionPlayerX + i, $positionPlayerY).addClass('selectable-cell');
         
+        if ($cellLeft.hasClass('greycell')) {
+            i = $maxMovesX
+            $cellLeft.removeClass('selectable-cell');
+        } 
+        
+        if ($cellRight.hasClass('greycell')) {
+            i = $maxMovesX
+            $cellRight.removeClass('selectable-cell')
+        } 
+        
     }
 
     for (let i = 1; i <= $maxMovesY; i++) {
-        let $cellDown = getCell($positionPlayerX, $positionPlayerY - i).addClass('selectable-cell');
-        let $cellUp = getCell($positionPlayerX, $positionPlayerY + i).addClass('selectable-cell');
+        let $cellUp = getCell($positionPlayerX, $positionPlayerY - i).addClass('selectable-cell');
+        let $cellDown = getCell($positionPlayerX, $positionPlayerY + i).addClass('selectable-cell');
+
+        if ($cellDown.hasClass('greycell')) {
+            i = $maxMovesY
+            $cellDown.removeClass('selectable-cell');
+        } 
+
+        if ($cellUp.hasClass('greycell')) {
+            i = $maxMovesY
+            $cellUp.removeClass('selectable-cell')
+        }
     }
 
-    // cible la class .selectable-cell et applique la fonction movePlayer au clic
+    // cible la class .selectable-cell et appel la fonction movePlayer() au clic
     $('.selectable-cell').click(movePlayer);
     
 }
 
 potentialsMoves()
-
-
 
 
 
