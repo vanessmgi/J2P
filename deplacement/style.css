@@ -37,6 +37,9 @@ td.cell {
     width: 70px;
     height: 70px;
 }
+td.cell.selectable-cell {
+    background-color: rgba(255, 166, 0, 0.322);
+}
 
 
 /* CUSTOM CELLS */
