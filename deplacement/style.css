@@ -1,6 +1,6 @@
 /* GENERAL */
 body {
-    background-color: rgba(92, 131, 175, 0.781);
+    background-color: rgba(48, 48, 48, 0.781);
     color: rgb(255, 175, 2) !important;
     font-family: 'Sorts Mill Goudy', serif !important;
     font-size: 15px;
@@ -26,8 +26,6 @@ table {
     border-collapse: collapse;
     background-color: rgba(15, 6, 1, 0.274);
     margin: auto;
-
-
 }
 
 td.cell {
@@ -36,31 +34,38 @@ td.cell {
     font-size: 90%;
     width: 70px;
     height: 70px;
+    border-radius: 50px;
 }
 td.cell.selectable-cell {
-    background-color: rgba(253, 144, 1, 0.158);
+    background-color: rgba(216, 147, 56, 0.13);
+    border-radius: 0;
+}
+td.cell.selectable-cell:hover {
+    background-color: rgba(121, 121, 121, 0)
 }
 
 
 /* CUSTOM CELLS */
 
 td.greycell {
-    background-color: #000000e3;
+    background-color: #00000085;
+    border-radius: 0;
 }
 
 td.weapon {
     background-color: #ff9900ce;
-    color: rgb(0, 0, 0);
 }
 
 td.player1 {
-    background-color: rgba(214, 32, 32, 0.295);
-    color: rgb(0, 0, 0);
+    background-color: rgba(214, 156, 32, 0.507);
+    padding: -4px -4px;
 }
 td.player2 {
-    background-color: rgba(107, 182, 114, 0.589);
-    color: rgb(0, 0, 0);
+    background-color: rgba(202, 201, 200, 0.534);
 }
 
+.active {
+    border: 1px solid red;
+}
 
 
