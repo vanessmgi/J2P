@@ -28,14 +28,13 @@ function potentialsMoves() {
     // ------ 3. Boucler jusqu'à que ce le nombre de mouvements maximum soit atteint ------ //
     /* à faire : 
     - faire une function pour gérer les 4 directions
-    - faire en sorte que les deux joueurs ne se superposent jamais
     */
 
     /* vérification case grise à gauche */
     for (let i = 1; i <= $maxMovesX; i++) {
         let $cellLeft = getCell($positionPlayerX - i, $positionPlayerY).addClass('selectable-cell');
 
-        if ($cellLeft.hasClass('greycell')) {
+        if ($cellLeft.hasClass('greycell') || $cellLeft.hasClass('player1', 'player2')) {
             $cellLeft.removeClass('selectable-cell');
             break;
         }
@@ -44,7 +43,7 @@ function potentialsMoves() {
     for (let i = 1; i <= $maxMovesX; i++) {
         let $cellRight = getCell($positionPlayerX + i, $positionPlayerY).addClass('selectable-cell');
 
-        if ($cellRight.hasClass('greycell')) {
+        if ($cellRight.hasClass('greycell') || $cellRight.hasClass('player1', 'player2')) {
             $cellRight.removeClass('selectable-cell')
             break;
         }
@@ -53,7 +52,7 @@ function potentialsMoves() {
     for (let i = 1; i <= $maxMovesY; i++) {
         let $cellUp = getCell($positionPlayerX, $positionPlayerY - i).addClass('selectable-cell');
 
-        if ($cellUp.hasClass('greycell')) {
+        if ($cellUp.hasClass('greycell') || $cellUp.hasClass('player1', 'player2')) {
             $cellUp.removeClass('selectable-cell')
             break;
         }
@@ -62,7 +61,7 @@ function potentialsMoves() {
     for (let i = 1; i <= $maxMovesY; i++) {
         let $cellDown = getCell($positionPlayerX, $positionPlayerY + i).addClass('selectable-cell');
 
-        if ($cellDown.hasClass('greycell')) {
+        if ($cellDown.hasClass('greycell') || $cellDown.hasClass('player1', 'player2')) {
             $cellDown.removeClass('selectable-cell');
             break;
         }
@@ -98,7 +97,7 @@ function movePlayer() {
         $player2 = $('.player2');
 
     }
-    $player2 != $player1
+    //$player2 != $player1
     $('.selectable-cell').off('click');
     $('.selectable-cell').removeClass('selectable-cell');
 
