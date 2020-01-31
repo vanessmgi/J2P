@@ -1,6 +1,6 @@
 /* GENERAL */
 body {
-    background-color: rgb(92, 131, 175);
+    background-color: rgba(92, 131, 175, 0.781);
     color: rgb(255, 175, 2) !important;
     font-family: 'Sorts Mill Goudy', serif !important;
     font-size: 15px;
@@ -24,7 +24,7 @@ li {
 /* ARRAY */
 table {
     border-collapse: collapse;
-    background-color: rgba(102, 42, 15, 0.274);
+    background-color: rgba(15, 6, 1, 0.274);
     margin: auto;
 
 
@@ -38,7 +38,7 @@ td.cell {
     height: 70px;
 }
 td.cell.selectable-cell {
-    background-color: rgba(255, 166, 0, 0.322);
+    background-color: rgba(253, 144, 1, 0.158);
 }
 
 
@@ -53,8 +53,12 @@ td.weapon {
     color: rgb(0, 0, 0);
 }
 
-td.player {
-    background-color: rgba(190, 190, 190, 0.589);
+td.player1 {
+    background-color: rgba(214, 32, 32, 0.295);
+    color: rgb(0, 0, 0);
+}
+td.player2 {
+    background-color: rgba(107, 182, 114, 0.589);
     color: rgb(0, 0, 0);
 }
 
