@@ -1,166 +1,107 @@
+// ---- Global variables ----
 
-// ------ Retourne la cellule des coordonnées (x,y) ------
+let $player1 = $('.player1')
+let $player2 = $('.player2')
+let $activePlayer = $('.active')
+
+
+// Retourne la cellule avec ses coordonnées (x,y)
 function getCell(x, y) {
     return $(`.cell[data-x=${x}][data-y=${y}]`);
 };
 
 
-// ------ Définit les mouvements d'un jouer -------
-function movePlayer() {
-
-    // Je sélectionne l'emplacement de mon joueur
-    const $player = $('.player');
-
-    // Je sélectionne mes cellules
-    const $cells = $('.cell')
-
-    // Je bouge mon joueur
-    $player.removeClass('player')
-    if ($cells.hasClass('.player')) {
-        $cells.attr('data-empty', false)
-    } else {
-        $cells.attr('data-empty', true)
-    }
-    $selectedCell = $(this);
-    $selectedCell.attr('data-empty', false)
-    $selectedCell.addClass('player');
-
-    $('.selectable-cell').off('click');
-    $('.selectable-cell').removeClass('selectable-cell');
-
-    // Je calcule les nouveaux déplacements possibles à partir de la nouvelle position de mon joueur
-    potentialsMoves()
-}
-
-
-// ------ Future fonction qui permettra de définir les déplacements potentiels ------
+// Définition des moves potentiels && inaccessibilité des cases grises
 function potentialsMoves() {
 
-    // 1. Prendre les coordonnées du joueur à l'emplacement ACTUEL
-    const $positionPlayerX = parseInt($('.player').attr('data-x'));
-    const $positionPlayerY = parseInt($('.player').attr('data-y'));
+    // ------ 1. Prendre les coordonnées du joueur à l'emplacement ACTUEL ------ //
+    const $positionPlayerX = parseInt($($activePlayer).attr('data-x'));
+    const $positionPlayerY = parseInt($($activePlayer).attr('data-y'));
     console.log("Position x = " + $positionPlayerX + " | " + "Position y = " + $positionPlayerY);
 
-    // 2. Définir le nombre de mouvement maximum 
 
+    // ------ 2. Définir le nombre de mouvement maximum ------ //
     const $maxMovesX = 2;
     const $maxMovesY = 1;
 
-    // 3. Boucler jusqu'à que ce le nombre de mouvements maximum soit atteint
-    
+
+    // ------ 3. Boucler jusqu'à que ce le nombre de mouvements maximum soit atteint ------ //
+    /* à faire : 
+    - faire une function pour gérer les 4 directions
+    - faire en sorte que les deux joueurs ne se superposent jamais
+    */
+
+    /* vérification case grise à gauche */
     for (let i = 1; i <= $maxMovesX; i++) {
         let $cellLeft = getCell($positionPlayerX - i, $positionPlayerY).addClass('selectable-cell');
-        let $cellRight = getCell($positionPlayerX + i, $positionPlayerY).addClass('selectable-cell');
-        
-        if ($cellLeft.hasClass('greycell')) {
-            i = $maxMovesX
-            $cellLeft.removeClass('selectable-cell');
-        } 
-        
-        if ($cellRight.hasClass('greycell')) {
-            i = $maxMovesX
-            $cellRight.removeClass('selectable-cell')
-        } 
-        
-    }
 
+        if ($cellLeft.hasClass('greycell')) {
+            $cellLeft.removeClass('selectable-cell');
+            break;
+        }
+    }
+    /* vérification case grise à droite */
+    for (let i = 1; i <= $maxMovesX; i++) {
+        let $cellRight = getCell($positionPlayerX + i, $positionPlayerY).addClass('selectable-cell');
+
+        if ($cellRight.hasClass('greycell')) {
+            $cellRight.removeClass('selectable-cell')
+            break;
+        }
+    }
+    /* vérification case grise en haut */
     for (let i = 1; i <= $maxMovesY; i++) {
         let $cellUp = getCell($positionPlayerX, $positionPlayerY - i).addClass('selectable-cell');
+
+        if ($cellUp.hasClass('greycell')) {
+            $cellUp.removeClass('selectable-cell')
+            break;
+        }
+    }
+    /* vérification case grise en bas */
+    for (let i = 1; i <= $maxMovesY; i++) {
         let $cellDown = getCell($positionPlayerX, $positionPlayerY + i).addClass('selectable-cell');
 
         if ($cellDown.hasClass('greycell')) {
-            i = $maxMovesY
             $cellDown.removeClass('selectable-cell');
-        } 
-
-        if ($cellUp.hasClass('greycell')) {
-            i = $maxMovesY
-            $cellUp.removeClass('selectable-cell')
+            break;
         }
     }
 
-    // cible la class .selectable-cell et appel la fonction movePlayer() au clic
+    // cible la class .selectable-cell et appel la fonction movePlayer() au clic //
     $('.selectable-cell').click(movePlayer);
-    
+
 }
 
 potentialsMoves()
 
-
-
-
-
-
-
-
-
-
-/*
-
-Déplacement sur toutes les cases
-
----
-
-// Au préalable, je sélectionne l'ensemble des cellules sur le DOM
-$cells = $('.cell')
-
-// Puis, sur l'ensemble de ces cellules, tu écoutes un événement au click
-$cells.click(function() {
-    // A chaque tour de click, tu sélectionnes la case ayant pour classe player
-    const $player = $('.player')
-
-    // Tu effectues le déplacement
-    $player.removeClass('player')
-    $(this).addClass('player')
-})
+// Gère le tour par tour //
+/* à faire :
+- optimiser la condition (trop répétitif)
 */
+function movePlayer() {
 
-// Deplacement en dur
-/*
-$firstSelectedCell = $('.cell[data-x="2"][data-y="2"]')
+    $selectedCell = $(this);
+    
+    if ($activePlayer.hasClass('player1')) { 
+        $activePlayer.removeClass('player1 active'); 
+        $selectedCell.addClass('player1');
+        $player2.addClass('active');
+        $activePlayer = $('.active');
+        $player1 = $('.player1');
 
-$rightSelectedCell = $('.cell[data-x="3"][data-y="2"]')
-$dbRightSelectedCell = $('.cell[data-x="4"][data-y="2"]')
+    } else {
+        $activePlayer.removeClass('player2 active');
+        $selectedCell.addClass('player2');
+        $player1.addClass('active');
+        $activePlayer = $('.active');
+        $player2 = $('.player2');
 
-$leftSelectedCell = $('.cell[data-x="1"][data-y="2"]')
-$dbLeftSelectedCell = $('.cell[data-x="0"][data-y="2"]')
+    }
+    $player2 != $player1
+    $('.selectable-cell').off('click');
+    $('.selectable-cell').removeClass('selectable-cell');
 
-$upSelectedCell = $('.cell[data-x="2"][data-y="1"]')
-$dbUpSelectedCell = $('.cell[data-x="2"][data-y="0"]')
-
-$downSelectedCell = $('.cell[data-x="2"][data-y="3"]')
-$dbDownSelectedCell = $('.cell[data-x="2"][data-y="4"]')
-
-*/
-
-
-
-// let $coordinateCell = $('.cell').click(function () {
-//     const $x = $(this).attr("data-x");
-//     const $y = $(this).attr("data-y");
-// })
-
-
-// $coordinateCell.click(movePlayer)
-
-
-/*
-$firstSelectedCell.click(movePlayer);
-$rightSelectedCell.click(movePlayer);
-$dbRightSelectedCell.click(movePlayer);
-$leftSelectedCell.click(movePlayer);
-$dbLeftSelectedCell.click(movePlayer);
-$upSelectedCell.click(movePlayer);
-$dbUpSelectedCell.click(movePlayer);
-$downSelectedCell.click(movePlayer);
-$dbDownSelectedCell.click(movePlayer);
-*/
-
-/**
- * Objectifs semaine du 26 janvier
- *  -> Maintenant que tu l'as fait en dur, réaliser les event listeners avec un système de boucle au lieu de le faire en dur
- *  -> Après le faire en fonction du déplacement du joueur (ça va être dans une fonction que tu vas appeler à chaque déplacement)
- */
-
-
-
+    potentialsMoves()
+    
+}
