@@ -59,22 +59,28 @@ td.cell.selectable-cell:hover {
 td.player1 {
     background-color: rgba(214, 156, 32, 0.3) !important;
     border-radius: 50px !important;
+    color: white;
 }
 
 td.player1.active {
     background-color: rgba(214, 156, 32, 0.8) !important;
+    color: white;
+    font-weight: bold;
 }
 
 
 /* Player 2 */
 
 td.player2 {
-    background-color: rgba(202, 201, 200, 0.3) !important;
+    background-color: rgba(202, 201, 200, 0.199) !important;
     border-radius: 50px !important;
+    color: white;
 }
 
 td.player2.active {
-    background-color: rgba(202, 201, 200, 0.8) !important;
+    background-color: rgba(230, 230, 230, 0.678) !important;
+    color: white;
+    font-weight: bold;
 }
 
 
@@ -86,5 +92,5 @@ td.greycell {
 }
 
 td.weapon {
-    background-color: #ff9900ce;
+    color: rgb(41, 192, 86);
 }
