@@ -44,7 +44,7 @@ class Game {
 
         $player1.click(function() {
             $(this).css("background-color", "#fff")
-            let greyCell = ('.greycell')
+            let $greyCell = $('.greycell')
 
 
         });
@@ -68,7 +68,7 @@ $(function () {
     let nbRows = 8;
     let nbGreyCell = 12;
     let nbWeapon = 4;
-    let nbPlayer = 1;
+    let nbPlayer = 2;
     let game = new Game(nbColumns, nbRows, nbGreyCell, nbWeapon, nbPlayer);
 
     game.start();
