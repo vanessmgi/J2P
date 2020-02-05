@@ -8,7 +8,6 @@ class Board {
     };
 
     
-
     // Génère un plateau de jeu + DOM
     generateBoard() {
         let $boardContainer = $('.board');
@@ -72,7 +71,7 @@ class Board {
             let $cell = this.getCell($position.x, $position.y);
 
             $cell.addClass('weapon');
-            $cell.attr('data-weapon-id', i);
+            $cell.attr('data-weapon-id', i);    
             $cell.text('Weapon ' + i);
             $cell.attr('data-empty', false);
         };
@@ -83,7 +82,6 @@ class Board {
         return !this.getCell(x, y).hasClass('player');
     };
 
-    
     // Vérifie si Joueur(s) autour d'une case
     noPlayersAround($position) {
         let $x = $position.x;
@@ -100,7 +98,6 @@ class Board {
         return false;
     };
 
-    
     // Vérifie qu'aucune case grise ne soit à coté de la cellule (x, y)
     checkCellIsNotGreyCell(x, y) {
         return !this.getCell(x, y).hasClass('greycell');
@@ -120,9 +117,7 @@ class Board {
             return true;
         };
         return false;
-    };
-
-
+    };    
 
     // Génère la position de x player tant que la case est vide && sans spawn côte à côte
     generatePlayerPosition() {
