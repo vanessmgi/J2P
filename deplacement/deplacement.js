@@ -10,6 +10,7 @@ function getCell(x, y) {
     return $(`.cell[data-x=${x}][data-y=${y}]`);
 };
 
+// Retourne la position du joueur actif
 function getPlayerPosition() {
     return {
         $positionPlayerX: parseInt($($activePlayer).attr('data-x')),
@@ -89,15 +90,23 @@ function movePlayer() {
     $selectedCell = $(this);
     
     if ($activePlayer.hasClass('player1')) { 
-        $activePlayer.removeClass('player1 active'); 
+        $activePlayer.removeClass('player1 active');
+        $activePlayer.empty();
+        $activePlayer.removeAttr('data-id', + 1); 
         $selectedCell.addClass('player1');
+        $selectedCell.text("Player1")
+        $selectedCell.attr('data-id', + 1)
         $player2.addClass('active');
         $activePlayer = $('.active');
         $player1 = $('.player1');
 
     } else {
         $activePlayer.removeClass('player2 active');
+        $activePlayer.removeAttr('data-id', + 2);
+        $activePlayer.empty();
         $selectedCell.addClass('player2');
+        $selectedCell.text("Player2")
+        $selectedCell.attr('data-id', + 2);
         $player1.addClass('active');
         $activePlayer = $('.active');
         $player2 = $('.player2');
@@ -107,16 +116,36 @@ function movePlayer() {
     $('.selectable-cell').off('click');
     $('.selectable-cell').removeClass('selectable-cell');
 
-    isOnBattleMode($player1, $player2)
-
+    
     potentialsMoves()
+    isOnBattleMode()
     
 }
 
-function isOnBattleMode($player1, $player2) {
+
+function isOnBattleMode() {
     // Est-ce que les joueurs sont en mode combat
     // L'idée de cette fonction : checker si les deux joueurs sont côté à côté
+
+    let $cellLeft = getCell(getPlayerPosition().$positionPlayerX - 1, getPlayerPosition().$positionPlayerY);
+    let $cellRight = getCell(getPlayerPosition().$positionPlayerX + 1, getPlayerPosition().$positionPlayerY);
+    let $cellUp = getCell(getPlayerPosition().$positionPlayerX, getPlayerPosition().$positionPlayerY - 1);
+    let $cellDown = getCell(getPlayerPosition().$positionPlayerX, getPlayerPosition().$positionPlayerY + 1);
+
+    // condition pour vérifier si joueurX est à côté du joueur('active')
+    if ($cellLeft.hasClass('player1') || $cellRight.hasClass('player1') || $cellUp.hasClass('player1') || $cellDown.hasClass('player1')) {
+        console.log("Active player attack player2 !")
+
+    } else if ($cellLeft.hasClass('player2') || $cellRight.hasClass('player2') || $cellUp.hasClass('player2') || $cellDown.hasClass('player2')) {  
+        console.log("Active player attack player1 !")
+
+    } else {
+        console.log("No player around");
+    }
+
 }
+
+isOnBattleMode();
 
 /**
  * Todo
