@@ -5,6 +5,27 @@ let $player2 = $('.player2')
 let $activePlayer = $('.active')
 
 
+/**
+ * Je déclare mes variables globales d'arme
+ */
+const weapon1 = 'couteau'
+const weapon2 = 'pistolet'
+const weapon3 = 'fusil'
+const weapon4 = 'bazooka'
+
+
+/**
+ * Les armes des joueurs
+ */
+let weaponePlayer1 = weapon1
+let weaponePlayer2 = weapon1
+
+
+// mon joueur 1 arrive sur une case fusil
+weaponePlayer1 = weapon3
+
+
+
 // Retourne la cellule avec ses coordonnées (x,y)
 function getCell(x, y) {
     return $(`.cell[data-x=${x}][data-y=${y}]`);
