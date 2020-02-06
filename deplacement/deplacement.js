@@ -134,11 +134,13 @@ function isOnBattleMode() {
 
     // condition pour vérifier si joueurX est à côté du joueur('active')
     if ($cellLeft.hasClass('player1') || $cellRight.hasClass('player1') || $cellUp.hasClass('player1') || $cellDown.hasClass('player1')) {
+        console.log("Joueur 1 vient de se positionner à côté du joueur 2");
         setTimeout(function () {
             confirm("Joueur 1 vient de se positionner à côté du joueur 2");
         }, 1000);
 
     } else if ($cellLeft.hasClass('player2') || $cellRight.hasClass('player2') || $cellUp.hasClass('player2') || $cellDown.hasClass('player2')) {
+        console.log("Joueur 2 vient de se positionner à côté du joueur 1");
         setTimeout(function () {
             confirm("Joueur 2 vient de se positionner à côté du joueur 1");
         }, 1000);
