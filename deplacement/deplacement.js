@@ -11,10 +11,10 @@ function getCell(x, y) {
 };
 
 // Retourne la position du joueur actif
-function getPlayerPosition() {
+function getPlayerPosition(player) {
     return {
-        $positionPlayerX: parseInt($($activePlayer).attr('data-x')),
-        $positionPlayerY: parseInt($($activePlayer).attr('data-y'))
+        $positionPlayerX: parseInt($(player).attr('data-x')),
+        $positionPlayerY: parseInt($(player).attr('data-y'))
     }
 }
 
@@ -39,7 +39,7 @@ function potentialsMoves() {
 
     /* vérification case grise à gauche */
     for (let i = 1; i <= $maxMovesX; i++) {
-        let $cellLeft = getCell(getPlayerPosition().$positionPlayerX - i, getPlayerPosition().$positionPlayerY).addClass('selectable-cell');
+        let $cellLeft = getCell(getPlayerPosition($activePlayer).$positionPlayerX - i, getPlayerPosition($activePlayer).$positionPlayerY).addClass('selectable-cell');
 
         if ($cellLeft.hasClass('greycell') || $cellLeft.hasClass('player1') || $cellLeft.hasClass('player2')) {
             $cellLeft.removeClass('selectable-cell');
@@ -48,7 +48,7 @@ function potentialsMoves() {
     }
     /* vérification case grise à droite */
     for (let i = 1; i <= $maxMovesX; i++) {
-        let $cellRight = getCell(getPlayerPosition().$positionPlayerX + i, getPlayerPosition().$positionPlayerY).addClass('selectable-cell');
+        let $cellRight = getCell(getPlayerPosition($activePlayer).$positionPlayerX + i, getPlayerPosition($activePlayer).$positionPlayerY).addClass('selectable-cell');
 
         if ($cellRight.hasClass('greycell') || $cellRight.hasClass('player1') || $cellRight.hasClass('player2')) {
             $cellRight.removeClass('selectable-cell')
@@ -57,7 +57,7 @@ function potentialsMoves() {
     }
     /* vérification case grise en haut */
     for (let i = 1; i <= $maxMovesY; i++) {
-        let $cellUp = getCell(getPlayerPosition().$positionPlayerX, getPlayerPosition().$positionPlayerY - i).addClass('selectable-cell');
+        let $cellUp = getCell(getPlayerPosition($activePlayer).$positionPlayerX, getPlayerPosition($activePlayer).$positionPlayerY - i).addClass('selectable-cell');
 
         if ($cellUp.hasClass('greycell') || $cellUp.hasClass('player1') || $cellUp.hasClass('player2')) {
             $cellUp.removeClass('selectable-cell')
@@ -66,7 +66,7 @@ function potentialsMoves() {
     }
     /* vérification case grise en bas */
     for (let i = 1; i <= $maxMovesY; i++) {
-        let $cellDown = getCell(getPlayerPosition().$positionPlayerX, getPlayerPosition().$positionPlayerY + i).addClass('selectable-cell');
+        let $cellDown = getCell(getPlayerPosition($activePlayer).$positionPlayerX, getPlayerPosition($activePlayer).$positionPlayerY + i).addClass('selectable-cell');
 
         if ($cellDown.hasClass('greycell') || $cellDown.hasClass('player1') || $cellDown.hasClass('player2')) {
             $cellDown.removeClass('selectable-cell');
@@ -88,11 +88,11 @@ potentialsMoves()
 function movePlayer() {
 
     $selectedCell = $(this);
-    
-    if ($activePlayer.hasClass('player1')) { 
+
+    if ($activePlayer.hasClass('player1')) {
         $activePlayer.removeClass('player1 active');
         $activePlayer.empty();
-        $activePlayer.removeAttr('data-id', + 1); 
+        $activePlayer.removeAttr('data-id', + 1);
         $selectedCell.addClass('player1');
         $selectedCell.text("Player1")
         $selectedCell.attr('data-id', + 1)
@@ -116,10 +116,10 @@ function movePlayer() {
     $('.selectable-cell').off('click');
     $('.selectable-cell').removeClass('selectable-cell');
 
-    
+
     potentialsMoves()
     isOnBattleMode()
-    
+
 }
 
 
@@ -127,17 +127,21 @@ function isOnBattleMode() {
     // Est-ce que les joueurs sont en mode combat
     // L'idée de cette fonction : checker si les deux joueurs sont côté à côté
 
-    let $cellLeft = getCell(getPlayerPosition().$positionPlayerX - 1, getPlayerPosition().$positionPlayerY);
-    let $cellRight = getCell(getPlayerPosition().$positionPlayerX + 1, getPlayerPosition().$positionPlayerY);
-    let $cellUp = getCell(getPlayerPosition().$positionPlayerX, getPlayerPosition().$positionPlayerY - 1);
-    let $cellDown = getCell(getPlayerPosition().$positionPlayerX, getPlayerPosition().$positionPlayerY + 1);
+    let $cellLeft = getCell(getPlayerPosition($activePlayer).$positionPlayerX - 1, getPlayerPosition($activePlayer).$positionPlayerY);
+    let $cellRight = getCell(getPlayerPosition($activePlayer).$positionPlayerX + 1, getPlayerPosition($activePlayer).$positionPlayerY);
+    let $cellUp = getCell(getPlayerPosition($activePlayer).$positionPlayerX, getPlayerPosition($activePlayer).$positionPlayerY - 1);
+    let $cellDown = getCell(getPlayerPosition($activePlayer).$positionPlayerX, getPlayerPosition($activePlayer).$positionPlayerY + 1);
 
     // condition pour vérifier si joueurX est à côté du joueur('active')
     if ($cellLeft.hasClass('player1') || $cellRight.hasClass('player1') || $cellUp.hasClass('player1') || $cellDown.hasClass('player1')) {
-        console.log("Active player attack player2 !")
+        setTimeout(function () {
+            confirm("Joueur 1 vient de se positionner à côté du joueur 2");
+        }, 1000);
 
-    } else if ($cellLeft.hasClass('player2') || $cellRight.hasClass('player2') || $cellUp.hasClass('player2') || $cellDown.hasClass('player2')) {  
-        console.log("Active player attack player1 !")
+    } else if ($cellLeft.hasClass('player2') || $cellRight.hasClass('player2') || $cellUp.hasClass('player2') || $cellDown.hasClass('player2')) {
+        setTimeout(function () {
+            confirm("Joueur 2 vient de se positionner à côté du joueur 1");
+        }, 1000);
 
     } else {
         console.log("No player around");
