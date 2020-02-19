@@ -13,16 +13,15 @@ const weapon2 = 'pistolet'
 const weapon3 = 'fusil'
 const weapon4 = 'bazooka'
 
-
 /**
  * Les armes des joueurs
  */
-let weaponePlayer1 = weapon1
-let weaponePlayer2 = weapon1
+let weaponPlayer1 = weapon1
+let weaponPlayer2 = weapon1
 
 
 // mon joueur 1 arrive sur une case fusil
-weaponePlayer1 = weapon3
+weaponPlayer1 = weapon3
 
 
 
@@ -43,17 +42,12 @@ function getPlayerPosition(player) {
 // Définition des moves potentiels && inaccessibilité des cases grises
 function potentialsMoves() {
 
-    // ------ 1. Prendre les coordonnées du joueur à l'emplacement ACTUEL ------ //
-    // MAINTENANT dans la fonction getPlayerPosition
-    // console.log("Position x = " + $positionPlayerX + " | " + "Position y = " + $positionPlayerY);
-
-
-    // ------ 2. Définir le nombre de mouvement maximum ------ //
+    // ------ 1. Définir le nombre de mouvement maximum ------ //
     const $maxMovesX = 2;
     const $maxMovesY = 1;
 
 
-    // ------ 3. Boucler jusqu'à que ce le nombre de mouvements maximum soit atteint ------ //
+    // ------ 2. Boucler jusqu'à que ce le nombre de mouvements maximum soit atteint ------ //
     /* à faire : 
     - faire une function pour gérer les 4 directions
     */
@@ -104,42 +98,57 @@ potentialsMoves()
 
 // Gère le tour par tour //
 /* à faire :
-- optimiser la condition (trop répétitif)
+- optimiser la condition (trop répétitive)
 */
+
+
 function movePlayer() {
 
     $selectedCell = $(this);
-
+    $destWeapon = $selectedCell.attr('data-wp-id');
+    
+    
     if ($activePlayer.hasClass('player1')) {
-        $activePlayer.removeClass('player1 active');
+        $activePlayer.removeClass('player1 active weapon');
         $activePlayer.empty();
-        $activePlayer.removeAttr('data-id', + 1);
-        $selectedCell.addClass('player1');
+        $activePlayer.removeAttr('data-id');
+        $activePlayer.removeAttr('data-id data-wp-id');
+        $selectedCell.addClass('player1 weapon');
         $selectedCell.text("Player1")
         $selectedCell.attr('data-id', + 1)
+        $selectedCell.attr('data-wp-id', + 1)
         $player2.addClass('active');
         $activePlayer = $('.active');
         $player1 = $('.player1');
 
     } else {
-        $activePlayer.removeClass('player2 active');
-        $activePlayer.removeAttr('data-id', + 2);
+        $activePlayer.removeClass('player2 active weapon');
+        $activePlayer.removeAttr('data-id data-wp-id');
         $activePlayer.empty();
-        $selectedCell.addClass('player2');
+        $selectedCell.addClass('player2 weapon');
         $selectedCell.text("Player2")
         $selectedCell.attr('data-id', + 2);
+        $selectedCell.attr('data-wp-id', + 1);
         $player1.addClass('active');
         $activePlayer = $('.active');
         $player2 = $('.player2');
 
     }
-    //$player2 != $player1
+
+    /* 
+    Lorsque mon joueur '.active' arrive sur une cellule qui contient un 'data-xp-id'
+    il récupère la nouvelle arme (met à jour le data-wp-id avec l'ID de la nouvelle arme)
+    lorsqu'il se déplace à nouveau (conserve le data-wp-id de sa nouvelle arme)
+    il laisse l'ancienne arme sur la case qu'il vient de quitter (ajout de la class .weapon / du text "Wx" / le data-wp-id de l'ancienne arme)
+    */
+ 
     $('.selectable-cell').off('click');
     $('.selectable-cell').removeClass('selectable-cell');
 
 
-    potentialsMoves()
-    isOnBattleMode()
+    potentialsMoves();
+    isOnBattleMode();
+    swapWeapons();
 
 }
 
@@ -155,28 +164,39 @@ function isOnBattleMode() {
 
     // condition pour vérifier si joueurX est à côté du joueur('active')
     if ($cellLeft.hasClass('player1') || $cellRight.hasClass('player1') || $cellUp.hasClass('player1') || $cellDown.hasClass('player1')) {
-        console.log("Joueur 1 vient de se positionner à côté du joueur 2");
+        console.log("Joueur 1 est prêt à attaquer le joueur 2 avec un " + weapon1);
         setTimeout(function () {
-            confirm("Joueur 1 vient de se positionner à côté du joueur 2");
+            confirm("Joueur 1 est prêt à attaquer le joueur 2 avec un " + weapon1);
         }, 1000);
 
     } else if ($cellLeft.hasClass('player2') || $cellRight.hasClass('player2') || $cellUp.hasClass('player2') || $cellDown.hasClass('player2')) {
-        console.log("Joueur 2 vient de se positionner à côté du joueur 1");
+        console.log("Joueur 2 est prêt à attaquer le joueur 1 avec un " + weapon1);
         setTimeout(function () {
-            confirm("Joueur 2 vient de se positionner à côté du joueur 1");
+            confirm("Joueur 2 est prêt à attaquer le joueur 1 avec un " + weapon1);
         }, 1000);
-
+        
     } else {
-        console.log("No player around");
+        //console.log("No player around");
     }
 
 }
 
 isOnBattleMode();
 
-/**
- * Todo
- *  -> Mode combat
- *      - 1. Tu peux commencer par coder en dure une position et si c'est les deux joueurs sont dessus, tu rentres en mode combat
- *      - 2. Si c'est trop simple de base en dure, vas-y directement en mode dynamique
- */
+
+function swapWeapons() { // 2 arguments à placer : arme possedée / future arme accessible à prendre
+
+    let $selectedCell = $('.selectable-cell');
+    
+    if ($selectedCell.hasClass('weapon')) {
+        console.log("arme(s) dispo");
+    } else {
+        console.log("pas d'arme(s) dans le coin");
+    }
+}
+
+
+
+
+
+    
