@@ -168,11 +168,11 @@ class Game {
             this.nextBattleRound();
 
             // Alert Start Fight
-            Swal.fire(
-                'Prêt(e) pour le combat ?',
-                'Go',
-                'question'
-            )
+            Swal.fire({
+                title: '<h1><br /> Prêt pour le combat ?</h1>',
+                confirmButtonColor: '#a56c01',
+                background: "#1f1e1e",
+            })
 
         } else {
             this.nextPlayer();
@@ -206,10 +206,11 @@ class Game {
                 // Alert Game Over
                 Swal.fire({
                     icon: 'success',
-                    title: this.currentPlayer.name + ' a gagné',
-                    text: 'Game Over',
+                    title: '<h1>' + this.currentPlayer.name + ' a gagné </h1>',
                     confirmButtonText: 'Rejouer',
-                    cancelButtonText: 'Fermer'
+                    cancelButtonText: 'Fermer',
+                    confirmButtonColor: '#a56c01',
+                    background: "#1f1e1e",
                 }).then((result) => {
                     if (result.value) {
                         location.reload();
@@ -262,12 +263,10 @@ class Game {
     rulesGame() {
         $("#rules").on("click", function () {
             Swal.fire({
-                title: 'War Game !',
-                text: 'Chaque joueur peut attaquer ou défendre à tour de rôle',
-                imageUrl: './assets/img/background.jpg',
-                imageWidth: 200,
-                imageHeight: 100,
-                imageAlt: 'Custom image',
+                title: '<h1>War Game !</h1>',
+                html: "<p style='color: grey'>1. Chaque joueur peut attaquer ou défendre en tour par tour.<br /><br />2. Les dégâts dépendent de l'armée possédée.<br /><br />3. Chaque joueur peut choisir d'attaquer ou de se défendre au tour d'après.<br /><br />4. Le joueur qui se défend encaissera 50% de dégâts en moins.<br /><br />5. La partie est terminée lorsque l'un des deux joueurs atteint 0 point de vie.</p>",
+                confirmButtonColor: '#a56c01',
+                background: "#1f1e1e",
             })
         });
     }
