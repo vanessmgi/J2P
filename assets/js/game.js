@@ -264,7 +264,7 @@ class Game {
         $("#rules").on("click", function () {
             Swal.fire({
                 title: '<h1>War Game !</h1>',
-                html: "<p style='color: grey'>1. Chaque joueur peut attaquer ou défendre en tour par tour.<br /><br />2. Les dégâts dépendent de l'armée possédée.<br /><br />3. Chaque joueur peut choisir d'attaquer ou de se défendre au tour d'après.<br /><br />4. Le joueur qui se défend encaissera 50% de dégâts en moins.<br /><br />5. La partie est terminée lorsque l'un des deux joueurs atteint 0 point de vie.</p>",
+                html: "<p style='color: lightgray'>1. Chaque joueur peut attaquer ou défendre en tour par tour.<br /><br />2. Les dégâts dépendent de l'armée possédée.<br /><br />3. Chaque joueur peut choisir d'attaquer ou de se défendre au tour d'après.<br /><br />4. Le joueur qui se défend encaissera 50% de dégâts en moins.<br /><br />5. La partie est terminée lorsque l'un des deux joueurs atteint 0 point de vie.</p>",
                 confirmButtonColor: '#a56c01',
                 background: "#1f1e1e",
             })
