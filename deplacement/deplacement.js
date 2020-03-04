@@ -111,7 +111,6 @@ function movePlayer() {
     if ($activePlayer.hasClass('player1')) {
         $activePlayer.removeClass('player1 active weapon');
         $activePlayer.empty();
-        $activePlayer.removeAttr('data-id');
         $activePlayer.removeAttr('data-id data-wp-id');
         $selectedCell.addClass('player1 weapon');
         $selectedCell.text("Player1")
@@ -136,7 +135,7 @@ function movePlayer() {
     }
 
     /* 
-    Lorsque mon joueur '.active' arrive sur une cellule qui contient un 'data-xp-id'
+    Lorsque mon joueur '.active' arrive sur une cellule qui contient un 'data-wp-id'
     il récupère la nouvelle arme (met à jour le data-wp-id avec l'ID de la nouvelle arme)
     lorsqu'il se déplace à nouveau (conserve le data-wp-id de sa nouvelle arme)
     il laisse l'ancienne arme sur la case qu'il vient de quitter (ajout de la class .weapon / du text "Wx" / le data-wp-id de l'ancienne arme)

@@ -1,19 +1,28 @@
 /* GENERAL */
+
 body {
-    background: url(/assets/img/background.jpg) no-repeat center;
-    background-size: cover;
-    color: rgb(255, 175, 2) !important;
-    font-family: 'Sorts Mill Goudy', serif !important;
-    font-size: 10px;
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.753) !important;
+    color: rgb(255, 175, 2) !important;
+    font-family: 'Sorts Mill Goudy', serif !important;
+    font-size: 12px;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 h1 {
     text-align: center;
     color: darkorange !important;
     margin-bottom: 60px !important;
+}
+
+h4 {
+    border-bottom: 1px solid rgba(255, 0, 0, 0.466);
 }
 
 li {
@@ -23,50 +32,52 @@ li {
 
 
 /* ARRAY */
+
 table {
     border-collapse: collapse;
-    background-color: rgba(102, 42, 15, 0.274);
+    background-color: rgba(15, 6, 1, 0.192);
     margin: auto;
-    box-shadow: 0 1px 25px #fd98007a !important;
-
 }
 
 td.cell {
     text-align: center;
-    border: 1px solid #ff9100;
+    border: 1px solid #ff91009a;
     font-size: 90%;
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
-
-
-/* CUSTOM CELLS */
 
 td.greycell {
-    background-color: #000000e3;
+    background-color: #00000085;
+    border-radius: 0;
 }
 
-td.weapon {
-    background-color: #ff9900ce;
-    color: rgb(0, 0, 0);
+/* Selectable-cell & hover */
+
+td.cell.selectable-cell {
+    background-color: rgba(216, 147, 56, 0.178);
+    border-radius: 0;
 }
 
-td.player {
-    background-color: rgba(248, 242, 242, 0.644);
-    color: rgb(0, 0, 0);
+td.cell.selectable-cell:hover {
+    background-color: rgba(121, 121, 121, 0)
 }
 
 
 /* Bootstrap */
 
 .card {
-    background-color: rgba(0, 0, 0, 0.301) !important;
+    background-color: rgba(0, 0, 0, 0.411) !important;
+    width: 100%;
+    height: auto;
     font-size: 1em;
     overflow: hidden;
-    padding: 0;
     border: none;
     border-radius: .28571429rem;
-    box-shadow: 0 1px 3px 0 #ff8800, 0 0 0 1px #ffa600;
+    box-shadow: 0 0 0 0.4px #ffa600;
+    opacity: 0.8;
 }
 
 .card-block {
@@ -96,7 +107,7 @@ td.player {
     margin-top: .5em;
     color: rgb(255, 136, 0);
     font-weight: normal;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .card-footer {
@@ -105,36 +116,96 @@ td.player {
     top: 0;
     left: 0;
     max-width: 100%;
-    padding: .75em 1em;
+    padding: 1em 1em !important;
     color: rgba(243, 243, 243, 0.4) !important;
     border-top: 1px solid rgba(0, 0, 0, .05) !important;
     background: rgba(255, 255, 255, 0.062) !important;
 }
 
-.profile {
-    position: absolute;
-    top: -12px;
-    display: inline-block;
-    overflow: hidden;
-    box-sizing: border-box;
-    width: 25px;
-    height: 25px;
-    margin: 0;
-    border: 1px solid #fff;
-    border-radius: 50%;
-}
-
 .profile-avatar {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 20%;
+    height: auto;
     border-radius: 50%;
+    border: 1px solid rgba(201, 201, 201, 0.315);
 }
 
-.progress {
-background-color: rgba(255, 255, 255, 0.185) !important;
+.active-player {
+    background-color: rgb(0, 0, 0) !important;
+    font-weight: bolder !important;
+    box-shadow: 0 0 0 1px #ffa600;
+    opacity: 1;
+}
+
+/* Custom Bootstrap buttons */
+
+.btn-attack {
+    background-color: rgba(255, 5, 5, 0.507);
+    color: azure;
+}
+
+.btn-attack:hover {
+    background-color: rgba(255, 5, 5, 0.815);
+    color: azure;
+}
+
+.btn-defend {
+    background-color: rgba(47, 255, 5, 0.39);
+    color: azure;
+}
+
+.btn-defend:hover {
+    background-color: rgba(47, 255, 5, 0.685);
+    color: azure;
+}
+
+.btn-custom {
+    background-color: #a56c01;
+    color: white;
+    font-weight: 400;
 }
 
 .bg-custom {
     background-color: red !important;
+}
+
+.fa {
+    color: rgba(255, 255, 255, 0.589);
+    padding-right: 5px;
+}
+
+.fab {
+    color: rgba(255, 255, 255, 0.589);
+    padding-right: 5px;
+}
+
+/* Custom Card Game */
+
+.player-health {
+    color: rgb(43, 255, 0) !important;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center !important;
+}
+
+.progress-bar-striped {
+    color: transparent !important;
+}
+
+.card-weapon {
+    text-align: center;
+    width: 100%;
+    margin: 20px 0;
+    max-width: 90%;
+}
+
+.card-weapon img {
+    max-width: 30%;
+    height: auto;
+}
+
+.weapon-damages {
+    font-size: 30px;
+    font-style: italic;
+    color: red;
 }
