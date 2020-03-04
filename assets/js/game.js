@@ -173,6 +173,8 @@ class Game {
                 confirmButtonColor: '#a56c01',
                 background: "#1f1e1e",
             })
+            $('.board').css('opacity', '0.5');
+
 
         } else {
             this.nextPlayer();
