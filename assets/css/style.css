@@ -35,7 +35,7 @@ li {
 
 table {
     border-collapse: collapse;
-    background-color: rgba(15, 6, 1, 0.192);
+    background-color: #0f060131;
     margin: auto;
 }
 
@@ -162,7 +162,13 @@ td.cell.selectable-cell:hover {
 .btn-custom {
     background-color: #a56c01;
     color: white;
-    font-weight: 400;
+    font-weight: 400 !important;
+}
+
+.btn-custom:hover {
+    background-color: #e09302;
+    color: white;
+    font-weight: 400 !important;
 }
 
 .bg-custom {
