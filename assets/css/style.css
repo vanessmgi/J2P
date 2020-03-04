@@ -5,7 +5,7 @@ body {
     padding: 0;
     margin: 0;
     display: flex;
-    background-color: rgba(0, 0, 0, 0.753) !important;
+    background-color: #000000c0 !important;
     color: rgb(255, 175, 2) !important;
     font-family: 'Sorts Mill Goudy', serif !important;
     font-size: 12px;
@@ -17,7 +17,7 @@ body {
 
 h1 {
     text-align: center;
-    color: darkorange !important;
+    color: #ff8c00 !important;
     margin-bottom: 60px !important;
 }
 
