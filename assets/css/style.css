@@ -21,13 +21,15 @@ h1 {
     margin-bottom: 60px !important;
 }
 
-h4 {
-    border-bottom: 1px solid rgba(255, 0, 0, 0.466);
+ul {
+    margin-bottom: 0 !important;
 }
 
 li {
     list-style: none;
     text-align: left;
+    border-bottom: 1px solid rgba(248, 248, 248, 0.466);
+    padding: 10px;
 }
 
 
@@ -57,7 +59,7 @@ td.greycell {
 /* Selectable-cell & hover */
 
 td.cell.selectable-cell {
-    background-color: rgba(216, 147, 56, 0.178);
+    background-color: rgba(245, 161, 50, 0.199);
     border-radius: 0;
 }
 
@@ -77,7 +79,7 @@ td.cell.selectable-cell:hover {
     border: none;
     border-radius: .28571429rem;
     box-shadow: 0 0 0 0.4px #ffa600;
-    opacity: 0.8;
+    opacity: 0.6;
 }
 
 .card-block {
@@ -96,10 +98,15 @@ td.cell.selectable-cell:hover {
     height: auto;
 }
 
+h4 {
+    border-bottom: 2px solid rgba(248, 248, 248, 0.466);
+    padding-bottom: 10px;
+}
+
 .card-title {
-    font-size: 1.28571429em;
+    font-size: 1.5em;
     font-weight: 700;
-    line-height: 1.2857em;
+    line-height: 1.2em;
 }
 
 .card-text {
@@ -118,8 +125,7 @@ td.cell.selectable-cell:hover {
     max-width: 100%;
     padding: 1em 1em !important;
     color: rgba(243, 243, 243, 0.4) !important;
-    border-top: 1px solid rgba(0, 0, 0, .05) !important;
-    background: rgba(255, 255, 255, 0.062) !important;
+    border-top: none !;
 }
 
 .profile-avatar {
@@ -139,36 +145,25 @@ td.cell.selectable-cell:hover {
 
 /* Custom Bootstrap buttons */
 
-.btn-attack {
-    background-color: rgba(255, 5, 5, 0.507);
+
+.btn-outline-danger:hover {
+    background-color: rgba(255, 5, 5, 0.815) !important;
     color: azure;
 }
 
-.btn-attack:hover {
-    background-color: rgba(255, 5, 5, 0.815);
+.btn-outline-success:hover {
+    background-color: rgba(47, 255, 5, 0.685) !important;
     color: azure;
 }
 
-.btn-defend {
-    background-color: rgba(47, 255, 5, 0.39);
+.btn-outline-warning {
+    color: rgba(240, 255, 255, 0.733) !important;
+}
+
+.btn-outline-warning:hover {
+    background-color: #ff8c009c !important;
     color: azure;
-}
-
-.btn-defend:hover {
-    background-color: rgba(47, 255, 5, 0.685);
-    color: azure;
-}
-
-.btn-custom {
-    background-color: #a56c01;
-    color: white;
-    font-weight: 400 !important;
-}
-
-.btn-custom:hover {
-    background-color: #e09302;
-    color: white;
-    font-weight: 400 !important;
+    font-weight: bold !important;
 }
 
 .bg-custom {
@@ -206,7 +201,7 @@ td.cell.selectable-cell:hover {
 }
 
 .card-weapon img {
-    max-width: 30%;
+    max-width: 50%;
     height: auto;
 }
 

@@ -1,4 +1,10 @@
-// Initialise tous les éléments du jeu
+/*
+Class qui gère l'initialisation des différents éléments :
+- la board
+- le placement des joueurs aléatoirement
+- le placement des armes aléatoirement
+- le placement des cases grises aléatoirement
+*/
 
 class Board {
     constructor(col, row, nbGreyCell, nbWeapon, nbPlayer) {
@@ -136,7 +142,7 @@ class Board {
             let $position = this.generatePosition(); // Case vide
 
             do {
-                $position = this.generatePosition(); // Case vide
+                $position = this.generatePosition(); 
             } while (!this.noPlayersAround($position));
             return $position;
         };
