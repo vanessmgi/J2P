@@ -7,6 +7,7 @@ class Weapon {
     }
 }
 
+// Création des instances des 5 armes (dont l'arme par défaut du joueur)
 const Weapons = [
     new Weapon(0, 'Knife', './assets/img/weapon0.png', 20),
     new Weapon(1, 'Pistol', './assets/img/weapon1.png', 25),
