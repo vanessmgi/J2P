@@ -143,8 +143,8 @@ h4 {
     opacity: 1;
 }
 
-/* Custom Bootstrap buttons */
 
+/* Custom Bootstrap buttons */
 
 .btn-outline-danger:hover {
     background-color: rgba(255, 5, 5, 0.815) !important;
@@ -179,6 +179,7 @@ h4 {
     color: rgba(255, 255, 255, 0.589);
     padding-right: 5px;
 }
+
 
 /* Custom Card Game */
 
