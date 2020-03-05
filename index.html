@@ -17,94 +17,101 @@
 
 <body>
     <div class="container-fluid">
-        <h1 class="my-4">War Game</h1>
+        <h1 class="pt-4 mb-0">War Game</h1>
         <div class="row d-flex justify-content-center mt-4">
 
             <!-- Player card - id="1" -->
-            <div class="col-sm-4 col-md-6 col-lg-2 order-1 mb-4 player-card" data-player-id="1">
+            <div class="col-sm-4 col-md-3 col-lg-2 order-1 mb-4 player-card" data-player-id="1">
                 <div class="card">
                     <img class="card-img-top">
                     <div class="card-block">
                         <figure class="profile">
                             <img class="player-image profile-avatar">
                         </figure>
-                        <h4 class="card-title mt-2 mb-4 text-center player-name"></h4>
+                        <h4 class="card-title mt-2 mb-2 text-center player-name"></h4>
                         <div class="card-text">
                             <ul class="p-2">
                                 <li class="text-center mb-2"><i class="fa fa-heartbeat pb-2"></i> Points de vie : <span
-                                        class="player-health"></span></li>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar progress-bar-striped bg-success player-health"
-                                        role="progressbar" style="width: 45%" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">
+                                        class="player-health"></span>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar progress-bar-striped bg-success player-health"
+                                            role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0"
+                                            aria-valuemax="100">
+                                        </div>
                                     </div>
-                                </div>
-                                <li class="text-center pt-4"><i class="fa fa-fire-alt"></i>Arme actuelle</li>
-                                <div class="current-weapon"></div>
-                                <div class="card-weapon"></div>
-                                <li class="text-center"><i class="fab fa-hotjar"></i>Points de dégâts : <span
-                                        class="weapon-damages"></span></li>
+                                </li>
+                                <li class="text-center pt-2"><i class="fa fa-fire-alt"></i>Arme actuelle
+                                    <div class="current-weapon"></div>
+                                    <div class="card-weapon "></div>
+                                </li>
+                                <li class="text-center mt-2"><i class="fab fa-hotjar"></i>Points de dégâts : <span
+                                        class="weapon-damages"></span>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <button class="btn btn-attack float-left btn-sm attack-button">Attack</button>
-                        <button class="btn btn-defend float-right btn-sm defend-button">Defend</button>
+                        <button class="btn col-12 mb-2 btn-outline-danger btn-sm attack-button">Attaquer</button>
+                        <button class="btn col-12 btn-outline-success btn-sm defend-button">Défendre</button>
                     </div>
                 </div>
             </div>
 
             <!-- dynamic board -->
-            <div class="board col-12 col-sm-12 col-md-12 col-lg-6 mb-4 order-lg-2 "></div>
+            <div class="board col-sm-12 col-md-12 col-lg-6 my-4 order-3 order-md-3 order-lg-2 "></div>
 
             <!-- Player card - id="2"-->
-            <div class="col-sm-4 col-md-6 col-lg-2 order-2 player-card" data-player-id="2">
+            <div class="col-sm-4 col-md-3 col-lg-2 order-2 player-card" data-player-id="2">
                 <div class="card">
                     <img class="card-img-top">
-                    <div class="card-block">
+                    <div class="card-block mb-0">
                         <figure class="profile">
                             <img class="player-image profile-avatar">
                         </figure>
-                        <h4 class="card-title mt-2 mb-4 text-center player-name"></h4>
+                        <h4 class="card-title mt-2 mb-2 text-center player-name"></h4>
                         <div class="card-text">
-                            <ul class="p-2">
+                            <ul class="p-2 mb-0">
                                 <li class="text-center mb-2"><i class="fa fa-heartbeat pb-2"></i> Points de vie : <span
-                                        class="player-health"></span></li>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar progress-bar-striped bg-success player-health"
-                                        role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">
+                                        class="player-health"></span>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar progress-bar-striped bg-success player-health"
+                                            role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0"
+                                            aria-valuemax="100">
+                                        </div>
                                     </div>
-                                </div>
-                                <li class="text-center pt-4"><i class="fa fa-fire-alt"></i>Arme actuelle</li>
-                                <div class="current-weapon"></div>
-                                <div class="card-weapon "></div>
-                                <li class="text-center"><i class="fab fa-hotjar"></i>Points de dégâts : <span
-                                        class="weapon-damages"></span></li>
+                                </li>
+                                <li class="text-center pt-2"><i class="fa fa-fire-alt"></i>Arme actuelle
+                                    <div class="current-weapon"></div>
+                                    <div class="card-weapon "></div>
+                                </li>
+                                <li class="text-center mt-2"><i class="fab fa-hotjar"></i>Points de dégâts : <span
+                                        class="weapon-damages"></span>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <button class="btn btn-attack float-left btn-sm attack-button">Attack</button>
-                        <button class="btn btn-defend float-right btn-sm defend-button">Defend</button>
+                        <button class="btn col-12 mb-2 btn-outline-danger btn-sm attack-button">Attaquer</button>
+                        <button class="btn col-12 btn-outline-success btn-sm defend-button">Défendre</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center mb-2">
-            <button id="reset" class="btn btn-custom float-left btn-sm mr-4">Restart</button>
-            <button id="rules" class="btn btn-custom btn-sm">Rules</button>
+        <div class="row justify-content-center mt-0">
+            <button id="rules" class="btn btn-outline-warning btn-sm mr-4">Règles du jeu</button>
+            <button id="reset" class="btn btn-outline-warning">Rejouer</button>
         </div>
+
 
     </div>
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="assets/js/board.js"></script>
-<script src="assets/js/weapon.js"></script>
-<script src="assets/js/player.js"></script>
-<script src="assets/js/game.js"></script>
+    <script src="assets/js/board.js"></script>
+    <script src="assets/js/weapon.js"></script>
+    <script src="assets/js/player.js"></script>
+    <script src="assets/js/game.js"></script>
 
 </body>
 
