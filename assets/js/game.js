@@ -1,4 +1,8 @@
 class Game {
+
+    SHIELD_DEFEND_VALUE = 0.5
+    SHIELD_ATTACK_VALUE = 0.0
+
     // Classe "chef d'orchestre"
     // Doit garder en mémoire les données des joueurs, armes, etc.
     constructor(col, row, nbGreyCell, nbWeapon, nbPlayer) {
@@ -18,6 +22,9 @@ class Game {
         this.onResetGame();
         this.nextRound();
         this.rulesGame();
+
+        console.log(this.SHIELD_ATTACK_VALUE)
+        console.log(this.SHIELD_DEFEND_VALUE)
     }
 
     refreshPlayersUI() {
@@ -195,7 +202,8 @@ class Game {
 
         $(currentCard).find('.attack-button').click(e => {
             this.resetRoundOptionListeners();
-            this.currentPlayer.shield = 0.0;
+            this.currentPlayer.shield = this.SHIELD_ATTACK_VALUE;
+            //
             let damages = this.currentPlayer.weapon.damages * (1 - otherPlayer.shield);
             console.log(this.currentPlayer.name + ' attaque ' + otherPlayer.name + ' : boum, ' + damages + ' damages !');
 
@@ -229,7 +237,8 @@ class Game {
         });
 
         $(currentCard).find('.defend-button').click(e => {
-            this.currentPlayer.shield = 0.5;
+            // 
+            this.currentPlayer.shield = this.SHIELD_DEFEND_VALUE;
             console.log(this.currentPlayer.name + ' se défend : gagne un bouclier de 50% pour la prochaine attaque');
             this.resetRoundOptionListeners();
             this.nextPlayer();
