@@ -10,13 +10,11 @@ class Player {
         this.x = x;
         this.y = y;
         this.shield = 0;
-
     }
 
     attack(currentPlayer, otherPlayer) {
         let attackResult = currentPlayer * (1 - otherPlayer);
         return attackResult;
     }
-
 
 }
