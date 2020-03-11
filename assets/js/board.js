@@ -7,6 +7,7 @@ Class qui gère l'initialisation des différents éléments :
 */
 
 class Board {
+    
     constructor(col, row, nbGreyCell, nbWeapon, nbPlayer) {
         this.col = col;
         this.row = row;
