@@ -11,8 +11,12 @@ Class qui gère tout le déroulement du jeu :
 
 class Game {
 
+    // Pas oublie les petits points virgules
     SHIELD_DEFEND_VALUE = 0.5
     SHIELD_ATTACK_VALUE = 0.0
+
+    MAX_MOV_X = 3
+    MAX_MOV_Y = 3
 
     constructor(col, row, nbGreyCell, nbWeapon, nbPlayer) {
         this.nbPlayer = nbPlayer;
@@ -84,12 +88,10 @@ class Game {
     }
 
     // Vérifie les mouvements possible et non disponible pour les joueurs
+    // Review : les méthodes nextRound and handleMovement ne servent à rien -> elles appellent toutes les deux potentialMoves
     potentialMoves() {
-        const maxMovesX = 3;
-        const maxMovesY = 3;
-
         /* vérification case grise à gauche */
-        for (let i = 1; i <= maxMovesX; i++) {
+        for (let i = 1; i <= this.MAX_MOV_X; i++) {
             let leftCell = this.board
                 .getCell(this.currentPlayer.x - i, this.currentPlayer.y)
                 .addClass("selectable-cell");
@@ -102,7 +104,7 @@ class Game {
             }
         }
         /* vérification case grise à droite */
-        for (let i = 1; i <= maxMovesX; i++) {
+        for (let i = 1; i <= this.MAX_MOV_X; i++) {
             let rightCell = this.board
                 .getCell(this.currentPlayer.x + i, this.currentPlayer.y)
                 .addClass("selectable-cell");
@@ -115,7 +117,7 @@ class Game {
             }
         }
         /* vérification case grise en haut */
-        for (let i = 1; i <= maxMovesY; i++) {
+        for (let i = 1; i <= this.MAX_MOV_Y; i++) {
             let topCell = this.board
                 .getCell(this.currentPlayer.x, this.currentPlayer.y - i)
                 .addClass("selectable-cell");
@@ -128,7 +130,7 @@ class Game {
             }
         }
         /* vérification case grise en bas */
-        for (let i = 1; i <= maxMovesY; i++) {
+        for (let i = 1; i <= this.MAX_MOV_Y; i++) {
             let bottomCell = this.board
                 .getCell(this.currentPlayer.x, this.currentPlayer.y + i)
                 .addClass("selectable-cell");
@@ -182,7 +184,7 @@ class Game {
         $(".selectable-cell").removeClass("selectable-cell");
 
         // Initialisation du combat
-        if (!this.board.noPlayersAround({ x: this.currentPlayer.x, y: this.currentPlayer.y })) {
+        if (!this.board.hasPlayersAround({ x: this.currentPlayer.x, y: this.currentPlayer.y })) {
             this.refreshPlayersUI();
             this.nextBattleRound();
 
@@ -204,7 +206,7 @@ class Game {
 
     // Gère les paramètres du combat
     nextBattleRound() {
-        let otherPlayer = this.players.find(player => {return player.id != this.currentPlayer.id;});
+        let otherPlayer = this.players.find(player => player.id != this.currentPlayer.id);
         let currentCard = $('.player-card[data-player-id=' + this.currentPlayer.id + ']');
         
         // Phase d'attaque
