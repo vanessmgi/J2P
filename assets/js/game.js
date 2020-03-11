@@ -156,6 +156,7 @@ class Game {
             $previousCell.attr('data-weapon-id', this.currentPlayer.previousWeapon.id);
             $previousCell.css('background-image', `url('${this.currentPlayer.previousWeapon.url}')`);
             this.currentPlayer.previousWeapon = null;
+
         } else { // réinitialise les attributs de la case précédente
             $previousCell.removeAttr('data-weapon-id');
             $previousCell.removeAttr('style');
@@ -193,6 +194,7 @@ class Game {
             })
             $('.board').css('opacity', '0.5');
 
+        // Sinon le tour par tour continue
         } else {
             this.nextPlayer();
             this.refreshPlayersUI();
@@ -209,6 +211,8 @@ class Game {
         $(currentCard).find('.attack-button').click(e => {
             this.resetRoundOptionListeners();
             this.currentPlayer.shield = this.SHIELD_ATTACK_VALUE;
+
+            // Stock le résultat de l'attaque
             let damages = this.currentPlayer.attack(this.currentPlayer.weapon.damages, otherPlayer.shield);
 
             // Si le joueur n'a plus de point de vie - Fin de la partie
@@ -216,8 +220,9 @@ class Game {
                 otherPlayer.health = 0;
                 this.currentPlayer.damages = 100;
                 this.refreshPlayersUI();
+                
 
-                // Alert Game Over et refresh du jeu
+                // Alert "Partie terminée" et relance une nouvelle partie
                 Swal.fire({
                     icon: 'success',
                     title: '<h1>' + this.currentPlayer.name + ' a gagné </h1>',
@@ -243,7 +248,7 @@ class Game {
 
         // Phase de défense
         $(currentCard).find('.defend-button').click(e => {
-            this.currentPlayer.shield = this.SHIELD_DEFEND_VALUE;
+            this.currentPlayer.shield = this.SHIELD_DEFEND_VALUE;    
             this.resetRoundOptionListeners();
             this.nextPlayer();
             this.refreshPlayersUI();
