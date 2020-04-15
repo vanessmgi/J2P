@@ -10,9 +10,12 @@ Class qui gère tout le déroulement du jeu :
 */
 
 class Game {
+    // Variables statiques
+    SHIELD_DEFEND_VALUE = 0.5;
+    SHIELD_ATTACK_VALUE = 0.0;
 
-    SHIELD_DEFEND_VALUE = 0.5
-    SHIELD_ATTACK_VALUE = 0.0
+    MAX_MOV_X = 3;
+    MAX_MOV_Y = 3;
 
     constructor(col, row, nbGreyCell, nbWeapon, nbPlayer) {
         this.nbPlayer = nbPlayer;
@@ -42,21 +45,21 @@ class Game {
     // Réactualise les class des joueurs
     refreshPlayerUI(player) {
         let card = $(".player-card[data-player-id=" + player.id + "]");
-            card.find(".player-name").text(player.name);
-            card.find(".player-health").css("width", player.health + "%");
-            card.find(".player-image").attr("src", player.image);
+        card.find(".player-name").text(player.name);
+        card.find(".player-health").css("width", player.health + "%");
+        card.find(".player-image").attr("src", player.image);
 
         if (player.id == this.currentPlayer.id) {
-            card.find('.card').addClass('active-player');
+            card.find(".card").addClass("active-player");
         } else {
-            card.find('.card').removeClass('active-player');
+            card.find(".card").removeClass("active-player");
         }
 
         let playerCell = this.board.getCell(player.x, player.y);
-            playerCell.css('background-image', `url('${player.image}')`);
-            card.find('.card-weapon').html(`<img src="${player.weapon.url}" />`)
-            card.find('.weapon-damages').text(player.weapon.damages);
-            card.find('.player-health').text(player.health);
+        playerCell.css("background-image", `url('${player.image}')`);
+        card.find(".card-weapon").html(`<img src="${player.weapon.url}" />`);
+        card.find(".weapon-damages").text(player.weapon.damages);
+        card.find(".player-health").text(player.health);
     }
 
     // Initialise les joueurs
@@ -64,14 +67,14 @@ class Game {
         for (let i = 0; i < this.nbPlayer; i++) {
             let $position = this.board.generatePlayerPosition();
             let $cell = this.board.getCell($position.x, $position.y);
-                $cell.addClass("player");
-                $cell.attr("data-empty", false);
+            $cell.addClass("player");
+            $cell.attr("data-empty", false);
             this.players.push(
                 new Player(i + 1, this.names[i], $position.x, $position.y)
             );
         }
         this.currentPlayer = this.players[0];
-        this.getPlayerCell(this.currentPlayer.id).addClass('active');
+        this.getPlayerCell(this.currentPlayer.id).addClass("active");
     }
 
     // Initialise le tour du joueur courant
@@ -84,117 +87,121 @@ class Game {
     }
 
     // Vérifie les mouvements possible et non disponible pour les joueurs
+    // Review : les méthodes nextRound and handleMovement ne servent à rien -> elles appellent toutes les deux potentialMoves
     potentialMoves() {
-        const maxMovesX = 3;
-        const maxMovesY = 3;
-
         /* vérification case grise à gauche */
-        for (let i = 1; i <= maxMovesX; i++) {
+        for (let i = 1; i <= this.MAX_MOV_X; i++) {
             let leftCell = this.board
                 .getCell(this.currentPlayer.x - i, this.currentPlayer.y)
                 .addClass("selectable-cell");
-            if (
-                leftCell.hasClass("greycell") ||
-                leftCell.hasClass("player")
-            ) {
+            if (leftCell.hasClass("greycell") || leftCell.hasClass("player")) {
                 leftCell.removeClass("selectable-cell");
                 break;
             }
         }
         /* vérification case grise à droite */
-        for (let i = 1; i <= maxMovesX; i++) {
+        for (let i = 1; i <= this.MAX_MOV_X; i++) {
             let rightCell = this.board
                 .getCell(this.currentPlayer.x + i, this.currentPlayer.y)
                 .addClass("selectable-cell");
-            if (
-                rightCell.hasClass("greycell") ||
-                rightCell.hasClass("player")
-            ) {
+            if (rightCell.hasClass("greycell") || rightCell.hasClass("player")) {
                 rightCell.removeClass("selectable-cell");
                 break;
             }
         }
         /* vérification case grise en haut */
-        for (let i = 1; i <= maxMovesY; i++) {
+        for (let i = 1; i <= this.MAX_MOV_Y; i++) {
             let topCell = this.board
                 .getCell(this.currentPlayer.x, this.currentPlayer.y - i)
                 .addClass("selectable-cell");
-            if (
-                topCell.hasClass("greycell") ||
-                topCell.hasClass("player")
-            ) {
+            if (topCell.hasClass("greycell") || topCell.hasClass("player")) {
                 topCell.removeClass("selectable-cell");
                 break;
             }
         }
         /* vérification case grise en bas */
-        for (let i = 1; i <= maxMovesY; i++) {
+        for (let i = 1; i <= this.MAX_MOV_Y; i++) {
             let bottomCell = this.board
                 .getCell(this.currentPlayer.x, this.currentPlayer.y + i)
                 .addClass("selectable-cell");
-            if (
-                bottomCell.hasClass("greycell") ||
-                bottomCell.hasClass("player")
-            ) {
+            if (bottomCell.hasClass("greycell") || bottomCell.hasClass("player")) {
                 bottomCell.removeClass("selectable-cell");
                 break;
             }
         }
-        // cible la class .selectable-cell et appel la fonction movePlayer() au clic 
-        $(".selectable-cell").click(e => { this.movePlayer(e) });
+        // cible la class .selectable-cell et appel la fonction movePlayer() au clic
+        $(".selectable-cell").click((e) => {
+            this.movePlayer(e);
+        });
     }
 
     // Gère le déplacement des joueurs
     movePlayer(e) {
         let $selectedCell = $(e.target);
         let $previousCell = this.getPlayerCell(this.currentPlayer.id);
-            $previousCell.removeClass("player active");
-            $previousCell.removeAttr("data-id");
+        $previousCell.removeClass("player active");
+        $previousCell.removeAttr("data-id");
 
-        if (this.currentPlayer.previousWeapon != null) { // Le précédent tour, a ramassé une arme
-            $previousCell.addClass('weapon');
-            $previousCell.attr('data-weapon-id', this.currentPlayer.previousWeapon.id);
-            $previousCell.css('background-image', `url('${this.currentPlayer.previousWeapon.url}')`);
+        if (this.currentPlayer.previousWeapon != null) {
+            // Le précédent tour, a ramassé une arme
+            $previousCell.addClass("weapon");
+            $previousCell.attr(
+                "data-weapon-id",
+                this.currentPlayer.previousWeapon.id
+            );
+            $previousCell.css(
+                "background-image",
+                `url('${this.currentPlayer.previousWeapon.url}')`
+            );
             this.currentPlayer.previousWeapon = null;
-
-        } else { // réinitialise les attributs de la case précédente
-            $previousCell.removeAttr('data-weapon-id');
-            $previousCell.removeAttr('style');
-            $previousCell.attr('data-empty', true);
+        } else {
+            // réinitialise les attributs de la case précédente
+            $previousCell.removeAttr("data-weapon-id");
+            $previousCell.removeAttr("style");
+            $previousCell.attr("data-empty", true);
         }
 
         $selectedCell.addClass("player");
         $selectedCell.attr("data-id", this.currentPlayer.id);
         $selectedCell.attr("data-empty", false);
 
-        if ($selectedCell.hasClass('weapon')) { // On remplace l'arme possédée par la nouvelle
-            let newWeapon = Weapons[$selectedCell.attr('data-weapon-id')];
-            $selectedCell.css('background-image', 'unset');
+        if ($selectedCell.hasClass("weapon")) {
+            // On remplace l'arme possédée par la nouvelle
+            let newWeapon = Weapons[$selectedCell.attr("data-weapon-id")];
+            $selectedCell.css("background-image", "unset");
             this.currentPlayer.previousWeapon = this.currentPlayer.weapon;
             this.currentPlayer.weapon = newWeapon;
         } else {
-            $selectedCell.css('background-image', `url("${this.currentPlayer.image}")`);
+            $selectedCell.css(
+                "background-image",
+                `url("${this.currentPlayer.image}")`
+            );
         }
 
-        this.currentPlayer.x = parseInt($selectedCell.attr('data-x'));
-        this.currentPlayer.y = parseInt($selectedCell.attr('data-y'));
+        this.currentPlayer.x = parseInt($selectedCell.attr("data-x"));
+        this.currentPlayer.y = parseInt($selectedCell.attr("data-y"));
         $(".selectable-cell").off("click");
         $(".selectable-cell").removeClass("selectable-cell");
 
         // Initialisation du combat
-        if (!this.board.noPlayersAround({ x: this.currentPlayer.x, y: this.currentPlayer.y })) {
+        if (
+            !this.board.hasPlayersAround({
+                x: this.currentPlayer.x,
+                y: this.currentPlayer.y,
+            })
+        ) {
             this.refreshPlayersUI();
             this.nextBattleRound();
 
             // Alert Start Fight
             Swal.fire({
-                title: '<h1><br /> Prêt pour le combat ?</h1>',
-                confirmButtonColor: '#a56c01',
+                title: "<h1><br /> Prêt pour le combat ?</h1>",
+                confirmButtonColor: "#a56c01",
                 background: "#1f1e1e",
-            })
-            $('.board').css('opacity', '0.5');
+            });
+            $(".board").css("opacity", "0.5");
 
-        // Sinon le tour par tour continue
+            // Sinon le tour par tour continue
         } else {
             this.nextPlayer();
             this.refreshPlayersUI();
@@ -204,67 +211,77 @@ class Game {
 
     // Gère les paramètres du combat
     nextBattleRound() {
-        let otherPlayer = this.players.find(player => {return player.id != this.currentPlayer.id;});
-        let currentCard = $('.player-card[data-player-id=' + this.currentPlayer.id + ']');
-        
+        let otherPlayer = this.players.find(
+            (player) => player.id != this.currentPlayer.id
+        );
+        let currentCard = $(
+            ".player-card[data-player-id=" + this.currentPlayer.id + "]"
+        );
+
         // Phase d'attaque
-        $(currentCard).find('.attack-button').click(e => {
-            this.resetRoundOptionListeners();
-            this.currentPlayer.shield = this.SHIELD_ATTACK_VALUE;
+        $(currentCard)
+            .find(".attack-button")
+            .click((e) => {
+                this.resetRoundOptionListeners();
+                this.currentPlayer.shield = this.SHIELD_ATTACK_VALUE;
 
-            // Stock le résultat de l'attaque
-            let damages = this.currentPlayer.attack(this.currentPlayer.weapon.damages, otherPlayer.shield);
+                // Stock le résultat de l'attaque
+                let damages = this.currentPlayer.attack(
+                    this.currentPlayer.weapon.damages,
+                    otherPlayer.shield
+                );
 
-            // Si le joueur n'a plus de point de vie - Fin de la partie
-            if ((otherPlayer.health - damages) <= 0) {
-                otherPlayer.health = 0;
-                this.currentPlayer.damages = 100;
-                this.refreshPlayersUI();
-                
+                // Si le joueur n'a plus de point de vie - Fin de la partie
+                if (otherPlayer.health - damages <= 0) {
+                    otherPlayer.health = 0;
+                    this.currentPlayer.damages = 100;
+                    this.refreshPlayersUI();
 
-                // Alert "Partie terminée" et relance une nouvelle partie
-                Swal.fire({
-                    icon: 'success',
-                    title: '<h1>' + this.currentPlayer.name + ' a gagné </h1>',
-                    confirmButtonText: 'Rejouer',
-                    cancelButtonText: 'Fermer',
-                    confirmButtonColor: '#a56c01',
-                    background: "#1f1e1e",
-                }).then((result) => {
-                    if (result.value) {
-                        location.reload();
-                    }
-                })
+                    // Alert "Partie terminée" et relance une nouvelle partie
+                    Swal.fire({
+                        icon: "success",
+                        title: "<h1>" + this.currentPlayer.name + " a gagné </h1>",
+                        confirmButtonText: "Rejouer",
+                        cancelButtonText: "Fermer",
+                        confirmButtonColor: "#a56c01",
+                        background: "#1f1e1e",
+                    }).then((result) => {
+                        if (result.value) {
+                            location.reload();
+                        }
+                    });
 
-            // Sinon le joueur continue le combat continue jusqu'à health = 0
-            } else {
-                otherPlayer.health -= damages;
-                this.nextPlayer();
-                this.currentPlayer.damages += damages;
-                this.refreshPlayersUI();
-                this.nextBattleRound();
-            }
-        });
+                    // Sinon le joueur continue le combat continue jusqu'à health = 0
+                } else {
+                    otherPlayer.health -= damages;
+                    this.nextPlayer();
+                    this.currentPlayer.damages += damages;
+                    this.refreshPlayersUI();
+                    this.nextBattleRound();
+                }
+            });
 
         // Phase de défense
-        $(currentCard).find('.defend-button').click(e => {
-            this.currentPlayer.shield = this.SHIELD_DEFEND_VALUE;    
-            this.resetRoundOptionListeners();
-            this.nextPlayer();
-            this.refreshPlayersUI();
-            this.nextBattleRound();
-        });
+        $(currentCard)
+            .find(".defend-button")
+            .click((e) => {
+                this.currentPlayer.shield = this.SHIELD_DEFEND_VALUE;
+                this.resetRoundOptionListeners();
+                this.nextPlayer();
+                this.refreshPlayersUI();
+                this.nextBattleRound();
+            });
     }
 
     // Gère le tour par tour
     nextPlayer() {
-        let newPlayerId = (this.currentPlayer.id) % this.players.length;
+        let newPlayerId = this.currentPlayer.id % this.players.length;
         this.currentPlayer = this.players[newPlayerId];
     }
 
     // Supprime les écouteurs d'événements sur les deux boutons
     resetRoundOptionListeners() {
-        $('.defend-button, .attack-button').off('click');
+        $(".defend-button, .attack-button").off("click");
     }
 
     getPlayer(indexPlayer) {
@@ -272,7 +289,9 @@ class Game {
     }
 
     getPlayerCell() {
-        return $(`.cell[data-x="${this.currentPlayer.x}"][data-y="${this.currentPlayer.y}"]`);
+        return $(
+            `.cell[data-x="${this.currentPlayer.x}"][data-y="${this.currentPlayer.y}"]`
+        );
     }
 
     onResetGame() {
@@ -285,11 +304,12 @@ class Game {
         $("#rules").on("click", function () {
             // Alert Règles du jeu
             Swal.fire({
-                title: '<h1>War Game !</h1>',
-                html: "<p style='color: lightgray'>1. Chaque joueur peut attaquer ou défendre en tour par tour.<br /><br />2. Les dégâts dépendent de l'armée possédée.<br /><br />3. Chaque joueur peut choisir d'attaquer ou de se défendre au tour d'après.<br /><br />4. Le joueur qui se défend encaissera 50% de dégâts en moins.<br /><br />5. La partie est terminée lorsque l'un des deux joueurs atteint 0 point de vie.</p>",
-                confirmButtonColor: '#a56c01',
+                title: "<h1>War Game !</h1>",
+                html:
+                    "<p style='color: lightgray'>1. Chaque joueur peut attaquer ou défendre en tour par tour.<br /><br />2. Les dégâts dépendent de l'armée possédée.<br /><br />3. Chaque joueur peut choisir d'attaquer ou de se défendre au tour d'après.<br /><br />4. Le joueur qui se défend encaissera 50% de dégâts en moins.<br /><br />5. La partie est terminée lorsque l'un des deux joueurs atteint 0 point de vie.</p>",
+                confirmButtonColor: "#a56c01",
                 background: "#1f1e1e",
-            })
+            });
         });
     }
 }

@@ -7,7 +7,7 @@ Class qui gère l'initialisation des différents éléments :
 */
 
 class Board {
-    
+
     constructor(col, row, nbGreyCell, nbWeapon, nbPlayer) {
         this.col = col;
         this.row = row;
@@ -101,7 +101,7 @@ class Board {
     };
 
     // Vérifie si Joueur(s) autour d'une case
-    noPlayersAround($position) {
+    hasPlayersAround($position) {
         let $x = $position.x;
         let $y = $position.y;
         let $celluleGaucheIsNotPlayer = this.checkCellIsNotPlayer($x - 1, $y);
@@ -109,32 +109,39 @@ class Board {
         let $celluleHautIsNotPlayer = this.checkCellIsNotPlayer($x, $y - 1);
         let $celluleBasIsNotPlayer = this.checkCellIsNotPlayer($x, $y + 1);
 
-        if ($celluleGaucheIsNotPlayer && $celluleDroiteIsNotPlayer && $celluleHautIsNotPlayer && $celluleBasIsNotPlayer) {
-            // Aucun joueur autour
-            return true;
-        };
-        return false;
+        // À tester mais normalement ça fonctionne
+        return $celluleGaucheIsNotPlayer && $celluleDroiteIsNotPlayer && $celluleHautIsNotPlayer && $celluleBasIsNotPlayer;
+
+        // if ($celluleGaucheIsNotPlayer && $celluleDroiteIsNotPlayer && $celluleHautIsNotPlayer && $celluleBasIsNotPlayer) {
+        //     // Aucun joueur autour
+        //     return true;
+        // };
+        // return false;
     };
 
     // Vérifie qu'aucune case grise ne soit à coté de la cellule (x, y)
-    checkCellIsNotGreyCell(x, y) {
+    isNotGreyCell(x, y) {
         return !this.getCell(x, y).hasClass('greycell');
     }
 
     // Vérifie si .greycell est autour d'une case
+    // Est-ce que c'est encore utilisé ?
     noGreyCellAround($position) {
         let $x = $position.x;
         let $y = $position.y;
-        let $celluleGaucheIsNotGreyCell = this.checkCellIsNotGreyCell($x - 1, $y);
-        let $celluleDroiteIsNotGreyCell = this.checkCellIsNotGreyCell($x + 1, $y);
-        let $celluleHautIsNotGreyCell = this.checkCellIsNotGreyCell($x, $y - 1);
-        let $celluleBasIsNotGreyCell = this.checkCellIsNotGreyCell($x, $y + 1);
+        let $celluleGaucheIsNotGreyCell = this.isNotGreyCell($x - 1, $y);
+        let $celluleDroiteIsNotGreyCell = this.isNotGreyCell($x + 1, $y);
+        let $celluleHautIsNotGreyCell = this.isNotGreyCell($x, $y - 1);
+        let $celluleBasIsNotGreyCell = this.isNotGreyCell($x, $y + 1);
 
-        if ($celluleGaucheIsNotGreyCell && $celluleDroiteIsNotGreyCell && $celluleHautIsNotGreyCell && $celluleBasIsNotGreyCell) {
-            // Aucun joueur autour
-            return true;
-        };
-        return false;
+
+        return $celluleGaucheIsNotGreyCell && $celluleDroiteIsNotGreyCell && $celluleHautIsNotGreyCell && $celluleBasIsNotGreyCell
+
+        // if ($celluleGaucheIsNotGreyCell && $celluleDroiteIsNotGreyCell && $celluleHautIsNotGreyCell && $celluleBasIsNotGreyCell) {
+        //     // Aucun joueur autour
+        //     return true;
+        // };
+        // return false;
     };
 
     // Génère la position de x player tant que la case est vide && sans spawn côte à côte
@@ -143,8 +150,8 @@ class Board {
             let $position = this.generatePosition(); // Case vide
 
             do {
-                $position = this.generatePosition(); 
-            } while (!this.noPlayersAround($position));
+                $position = this.generatePosition();
+            } while (!this.hasPlayersAround($position));
             return $position;
         };
     };
